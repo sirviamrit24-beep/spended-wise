@@ -20,10 +20,10 @@
     --popover-foreground: 215 28% 17%;
 
     /* Brand colors - Financial Blue/Teal */
-    --primary: 199 89% 48%;
+    --primary: 262 83% 58%;
     --primary-foreground: 0 0% 100%;
-    --primary-glow: 199 89% 65%;
-    --primary-soft: 199 89% 96%;
+    --primary-glow: 262 80% 65%;
+    --primary-soft: 262 83% 96%;
 
     /* Financial semantic colors */
     --income: 142 76% 36%;
@@ -49,8 +49,8 @@
     --muted: 210 17% 96%;
     --muted-foreground: 215 16% 47%;
 
-    --accent: 199 89% 96%;
-    --accent-foreground: 199 89% 24%;
+    --accent: 262 83% 96%;
+    --accent-foreground: 262 83% 24%;
 
     /* System colors */
     --destructive: 0 84% 60%;
@@ -58,23 +58,26 @@
 
     --border: 214 32% 91%;
     --input: 214 32% 91%;
-    --ring: 199 89% 48%;
+    --ring: 262 83% 58%;
 
     --radius: 0.75rem;
 
-    /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
-    --gradient-income: linear-gradient(135deg, hsl(var(--income)), hsl(142 76% 50%));
-    --gradient-card: linear-gradient(180deg, hsl(var(--card)), hsl(248 250 252 / 0.5));
+    /* Professional gradients and backgrounds */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(262 80% 65%));
+    --gradient-subtle: linear-gradient(145deg, hsl(var(--background)), hsl(210 25% 95%));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(210 15% 98%));
+    --gradient-hero: linear-gradient(135deg, hsl(262 83% 58%) 0%, hsl(262 70% 50%) 50%, hsl(240 70% 45%) 100%);
+    --gradient-background: linear-gradient(150deg, hsl(248 50% 98%) 0%, hsl(220 40% 96%) 30%, hsl(262 30% 94%) 100%);
+    --pattern-dots: radial-gradient(circle at 2px 2px, hsl(var(--primary) / 0.08) 1px, transparent 0);
 
-    /* Shadows */
-    --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-    --shadow-card-hover: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-    --shadow-float: 0 10px 25px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    /* Enhanced shadows */
+    --shadow-card: 0 4px 20px -2px hsl(var(--primary) / 0.08);
+    --shadow-card-hover: 0 8px 30px -4px hsl(var(--primary) / 0.12);
+    --shadow-float: 0 20px 40px -12px hsl(var(--primary) / 0.2);
 
     /* Animations */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     --sidebar-background: 0 0% 98%;
 
@@ -139,5 +142,22 @@
 
   body {
     @apply bg-background text-foreground;
+    background: var(--gradient-background);
+    background-attachment: fixed;
+    position: relative;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--pattern-dots);
+    background-size: 20px 20px;
+    pointer-events: none;
+    opacity: 0.6;
+    z-index: -1;
   }
 }

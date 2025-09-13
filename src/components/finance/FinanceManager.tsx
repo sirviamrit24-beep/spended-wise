@@ -166,15 +166,15 @@ export const FinanceManager = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen text-foreground relative">
       {/* Header */}
-      <header className="bg-card shadow-card sticky top-0 z-10 border-b border-border">
+      <header className="bg-card/80 backdrop-blur-md shadow-card sticky top-0 z-10 border-b border-border">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           <div className="flex items-center space-x-3">
-            <div className="bg-gradient-to-br from-primary to-primary-glow text-primary-foreground p-2.5 rounded-xl shadow-card">
+            <div className="bg-gradient-primary text-primary-foreground p-2.5 rounded-xl shadow-card-hover">
               <Wallet className="h-6 w-6" />
             </div>
-            <h1 className="text-xl font-bold bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
+            <h1 className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">
               StudentFinances
             </h1>
           </div>
@@ -187,8 +187,8 @@ export const FinanceManager = () => {
                 onClick={() => setActiveTab(id)}
                 className={`font-medium px-4 py-2.5 rounded-xl transition-all duration-200 flex items-center gap-2 ${
                   activeTab === id 
-                    ? 'bg-primary text-primary-foreground shadow-card-hover' 
-                    : 'text-muted-foreground hover:text-foreground hover:bg-accent'
+                    ? 'bg-gradient-primary text-primary-foreground shadow-card-hover' 
+                    : 'text-muted-foreground hover:text-foreground hover:bg-accent/50 hover:shadow-card'
                 }`}
               >
                 <Icon className="h-4 w-4" />
@@ -201,19 +201,19 @@ export const FinanceManager = () => {
             {/* Notifications */}
             <div className="relative">
               <button 
-                className="bg-accent p-2.5 rounded-xl hover:bg-accent-foreground/10 transition-colors relative"
+                className="bg-accent/50 backdrop-blur-sm p-2.5 rounded-xl hover:bg-accent transition-colors relative shadow-card hover:shadow-card-hover"
                 onClick={clearNotifications}
               >
                 <Bell className="h-5 w-5 text-accent-foreground" />
                 {notifications.filter(n => !n.read).length > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-expense text-expense-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold animate-pulse">
+                  <span className="absolute -top-1 -right-1 bg-expense text-expense-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold animate-pulse shadow-card">
                     {notifications.filter(n => !n.read).length}
                   </span>
                 )}
               </button>
             </div>
 
-            <div className="w-10 h-10 bg-primary-soft rounded-xl flex items-center justify-center text-primary font-bold cursor-pointer hover:scale-105 transition-transform">
+            <div className="w-10 h-10 bg-gradient-primary rounded-xl flex items-center justify-center text-primary-foreground font-bold cursor-pointer hover:scale-105 transition-all duration-200 shadow-card hover:shadow-card-hover">
               JS
             </div>
           </div>
@@ -372,24 +372,58 @@ export const FinanceManager = () => {
           </>
         )}
 
-        {/* Other tabs placeholder */}
-        {activeTab !== 'dashboard' && (
-          <div className="bg-card rounded-xl shadow-card border border-border p-12 text-center">
-            <div className="text-muted-foreground mb-6">
-              {activeTab === 'transactions' && <CreditCard className="h-16 w-16 mx-auto" />}
-              {activeTab === 'budgets' && <Wallet className="h-16 w-16 mx-auto" />}
-              {activeTab === 'goals' && <Target className="h-16 w-16 mx-auto" />}
+        {/* Transactions Tab */}
+        {activeTab === 'transactions' && (
+          <div className="space-y-6">
+            <div className="flex justify-between items-center">
+              <h1 className="text-3xl font-bold">All Transactions</h1>
+              <button 
+                onClick={() => setShowTransactionForm(!showTransactionForm)}
+                className="bg-primary text-primary-foreground px-4 py-2 rounded-xl hover:bg-primary-glow transition-colors font-semibold flex items-center gap-2"
+              >
+                <Plus className="h-4 w-4" /> Add Transaction
+              </button>
             </div>
-            <h2 className="text-2xl font-bold mb-4">
-              {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} Management
-            </h2>
-            <p className="text-muted-foreground mb-6">This section is under development</p>
-            <button 
-              onClick={() => setActiveTab('dashboard')}
-              className="bg-primary text-primary-foreground px-6 py-3 rounded-xl hover:bg-primary-glow transition-colors font-semibold shadow-card"
-            >
-              Return to Dashboard
-            </button>
+            
+            <div className="bg-card rounded-xl shadow-card border border-border p-6">
+              <div className="space-y-2">
+                {transactions.map(transaction => (
+                  <TransactionItem key={transaction.id} transaction={transaction} />
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Budgets Tab */}
+        {activeTab === 'budgets' && (
+          <div className="space-y-6">
+            <div className="flex justify-between items-center">
+              <h1 className="text-3xl font-bold">Budget Management</h1>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {budgets.map((budget) => (
+                <div key={budget.id} className="bg-card rounded-xl shadow-card border border-border p-6">
+                  <BudgetProgress budget={budget} onReset={resetBudget} />
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Goals Tab */}
+        {activeTab === 'goals' && (
+          <div className="space-y-6">
+            <div className="flex justify-between items-center">
+              <h1 className="text-3xl font-bold">Savings Goals</h1>
+            </div>
+            
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {goals.map(goal => (
+                <SavingsGoal key={goal.id} goal={goal} onAddFunds={addToGoal} />
+              ))}
+            </div>
           </div>
         )}
       </main>
