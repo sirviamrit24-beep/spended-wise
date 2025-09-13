@@ -21,7 +21,7 @@ export const SavingsGoal = ({ goal, onAddFunds }: SavingsGoalProps) => {
       <div className="flex justify-between items-start mb-3">
         <h3 className="font-bold text-foreground text-lg">{goal.name}</h3>
         <span className="text-sm text-muted-foreground font-medium">
-          ${goal.current} / ${goal.target}
+          ₹{goal.current} / ₹{goal.target}
         </span>
       </div>
       
@@ -46,22 +46,22 @@ export const SavingsGoal = ({ goal, onAddFunds }: SavingsGoalProps) => {
       {!isComplete && (
         <div className="flex space-x-2">
           <button 
-            onClick={() => onAddFunds(goal.id, 25)}
+            onClick={() => onAddFunds(goal.id, 500)}
             className="flex-1 bg-primary text-primary-foreground text-sm font-medium py-2 px-3 rounded-lg hover:bg-primary-glow transition-colors"
           >
-            +$25
+            +₹500
           </button>
           <button 
-            onClick={() => onAddFunds(goal.id, 50)}
+            onClick={() => onAddFunds(goal.id, 1000)}
             className="flex-1 bg-success text-success-foreground text-sm font-medium py-2 px-3 rounded-lg hover:opacity-90 transition-opacity"
           >
-            +$50
+            +₹1000
           </button>
           <button 
-            onClick={() => onAddFunds(goal.id, 100)}
+            onClick={() => onAddFunds(goal.id, 2000)}
             className="flex-1 bg-income text-income-foreground text-sm font-medium py-2 px-3 rounded-lg hover:opacity-90 transition-opacity"
           >
-            +$100
+            +₹2000
           </button>
         </div>
       )}

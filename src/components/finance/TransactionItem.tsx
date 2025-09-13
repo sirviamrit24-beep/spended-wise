@@ -43,7 +43,7 @@ export const TransactionItem = ({ transaction }: TransactionItemProps) => {
         <p className={`font-bold text-lg ${
           isIncome ? 'text-income' : 'text-expense'
         }`}>
-          {isIncome ? '+' : '-'}${transaction.amount.toFixed(2)}
+          {isIncome ? '+' : '-'}₹{transaction.amount.toFixed(2)}
         </p>
       </div>
     </div>

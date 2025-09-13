@@ -34,9 +34,9 @@ export const BudgetProgress = ({ budget, onReset }: BudgetProgressProps) => {
         <span className="font-medium text-foreground">{budget.category}</span>
         <span className="text-sm font-semibold">
           <span className={isOverBudget ? 'text-expense' : 'text-foreground'}>
-            ${budget.current}
+            ₹{budget.current}
           </span>
-          <span className="text-muted-foreground"> / ${budget.max}</span>
+          <span className="text-muted-foreground"> / ₹{budget.max}</span>
         </span>
       </div>
       

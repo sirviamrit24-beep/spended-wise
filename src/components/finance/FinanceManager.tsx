@@ -55,29 +55,29 @@ interface Notification {
 export const FinanceManager = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [transactions, setTransactions] = useState<Transaction[]>([
-    { id: 1, name: 'Coffee Shop', amount: 4.50, category: 'Food', date: '2024-01-15', type: 'expense' },
-    { id: 2, name: 'Textbooks', amount: 85.00, category: 'Education', date: '2024-01-12', type: 'expense' },
-    { id: 3, name: 'Part-time Job', amount: 320.00, category: 'Income', date: '2024-01-10', type: 'income' },
-    { id: 4, name: 'Gym Membership', amount: 25.00, category: 'Health', date: '2024-01-08', type: 'expense' },
-    { id: 5, name: 'Public Transport', amount: 35.00, category: 'Transport', date: '2024-01-05', type: 'expense' },
+    { id: 1, name: 'Coffee Shop', amount: 150.00, category: 'Food', date: '2024-01-15', type: 'expense' },
+    { id: 2, name: 'Textbooks', amount: 3200.00, category: 'Education', date: '2024-01-12', type: 'expense' },
+    { id: 3, name: 'Part-time Job', amount: 12000.00, category: 'Income', date: '2024-01-10', type: 'income' },
+    { id: 4, name: 'Gym Membership', amount: 1500.00, category: 'Health', date: '2024-01-08', type: 'expense' },
+    { id: 5, name: 'Public Transport', amount: 800.00, category: 'Transport', date: '2024-01-05', type: 'expense' },
   ]);
 
   const [budgets, setBudgets] = useState<Budget[]>([
-    { id: 1, category: 'Food', current: 120, max: 200, color: 'bg-primary' },
-    { id: 2, category: 'Transport', current: 80, max: 100, color: 'bg-warning' },
-    { id: 3, category: 'Entertainment', current: 40, max: 100, color: 'bg-success' },
-    { id: 4, category: 'Education', current: 150, max: 250, color: 'bg-income' },
+    { id: 1, category: 'Food', current: 4500, max: 8000, color: 'bg-primary' },
+    { id: 2, category: 'Transport', current: 2500, max: 3500, color: 'bg-warning' },
+    { id: 3, category: 'Entertainment', current: 1200, max: 4000, color: 'bg-success' },
+    { id: 4, category: 'Education', current: 6000, max: 10000, color: 'bg-income' },
   ]);
 
   const [goals, setGoals] = useState<Goal[]>([
-    { id: 1, name: 'New Laptop', target: 1200, current: 750, deadline: '2024-08-15' },
-    { id: 2, name: 'Spring Break Trip', target: 800, current: 320, deadline: '2024-03-10' },
+    { id: 1, name: 'New Laptop', target: 65000, current: 42000, deadline: '2024-08-15' },
+    { id: 2, name: 'Spring Break Trip', target: 25000, current: 12000, deadline: '2024-03-10' },
   ]);
 
   const [insights, setInsights] = useState<Insight[]>([
     { id: 1, text: 'Your food spending is 15% higher than last month', type: 'warning' },
-    { id: 2, text: 'You saved $50 this week compared to your average', type: 'success' },
-    { id: 3, text: 'You\'re on track to reach your laptop goal 2 weeks early', type: 'success' },
+    { id: 2, text: 'You saved ₹2000 this week compared to your average', type: 'success' },
+    { id: 3, text: "You're on track to reach your laptop goal 2 weeks early", type: 'success' },
   ]);
 
   const [newTransaction, setNewTransaction] = useState({ 
@@ -87,7 +87,7 @@ export const FinanceManager = () => {
   });
 
   const [notifications, setNotifications] = useState<Notification[]>([
-    { id: 1, message: 'Budget alert: You\'ve reached 80% of your Food budget', read: false },
+    { id: 1, message: "Budget alert: You've reached 80% of your Food budget", read: false },
     { id: 2, message: 'New insight available for your spending patterns', read: false },
   ]);
 
@@ -292,7 +292,7 @@ export const FinanceManager = () => {
                         <div 
                           className="w-10 bg-gradient-to-t from-primary to-primary-glow rounded-t-lg transition-all duration-500 hover:from-primary-glow hover:to-primary cursor-pointer shadow-card" 
                           style={{ height: `${Math.max(20, (data.amount / 80) * 100)}%` }}
-                          title={`$${data.amount} on ${data.day}`}
+                          title={`₹${data.amount} on ${data.day}`}
                         />
                         <p className="text-sm font-medium text-muted-foreground">{data.day}</p>
                       </div>

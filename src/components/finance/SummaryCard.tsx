@@ -46,7 +46,7 @@ export const SummaryCard = ({
           <p className="text-muted-foreground text-sm font-medium">{title}</p>
           <p className="text-3xl font-bold mt-2 tracking-tight">
             {variant === 'expense' && amount !== '0.00' ? '-' : ''}
-            ${amount}{suffix}
+            ₹{amount}{suffix}
           </p>
         </div>
         <div className="bg-primary-soft p-3 rounded-xl">
